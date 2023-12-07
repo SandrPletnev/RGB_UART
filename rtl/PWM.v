@@ -2,7 +2,7 @@ module PWM
 (
 	input clk,
 	input rst_n,
-	input [7:0] command,
+	(*mark_debug = "true"*) input [7:0] command,
 	input rx_valid,
 	output [2:0] LED
 );
@@ -13,8 +13,8 @@ localparam COMMAND_DET = 1;
 reg [4:0] cnt;
 reg rx_valid_reg;
 reg [1:0] cstate, nstate;
-reg [2:0] color;
-reg [3:0] brightness;
+(*mark_debug = "true"*) reg [2:0] color;
+(*mark_debug = "true"*) reg [3:0] brightness;
 
 always @ (posedge clk, negedge rst_n) begin
 	if (!rst_n) begin

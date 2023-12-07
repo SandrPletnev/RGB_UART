@@ -6,13 +6,13 @@ module Top
 )
 (
 	input clk,
-	input rst_n,
-	input rx,
-	output [2:0] LED
+	(*mark_debug = "true"*) input rst_n,
+	(*mark_debug = "true"*) input rx,
+	(*mark_debug = "true"*) output [2:0] LED
 );
 
 wire [7:0] rx_command;
-wire valid;
+(*mark_debug = "true"*) wire valid;
 
 UART #(.BIT_RATE(BIT_RATE), .PAYLOAD_BITS(PAYLOAD_BITS), .CLK_HZ(CLK_HZ)) UART_top
 (
