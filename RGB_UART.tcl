@@ -423,3 +423,16 @@ set_property -name "steps.write_bitstream.args.verbose" -value "0" -objects $obj
 current_run -implementation [get_runs impl_1]
 
 puts "INFO: Project created:${_xil_proj_name_}"
+
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+puts "-------SYNTH COMPLETED-------"
+open_run synth_1 -name synth_1
+
+launch_runs impl_1
+wait_on_run impl_1
+puts "-------IMPL COMPLETED-------"
+
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+puts "-------BITSTREAM COMPLETED-------"

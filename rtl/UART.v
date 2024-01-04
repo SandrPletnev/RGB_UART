@@ -19,8 +19,9 @@ wire uart_rx_break;
 reg  [PAYLOAD_BITS-1:0] command_reg;
 assign command = command_reg;
 
-assign rx_valid = uart_rx_valid;
+assign rx_valid = uart_rx_valid; // Разрешающий сигнал
 
+// Помещение полученных данных в регистр команды
 always @ (posedge clk, negedge rst_n) begin
     if(!rst_n) begin
         command_reg <= 8'hF0;
@@ -29,6 +30,7 @@ always @ (posedge clk, negedge rst_n) begin
     end
 end
 
+// Модуль приемника UART
 uart_rx #(.BIT_RATE(BIT_RATE), .PAYLOAD_BITS(PAYLOAD_BITS), .CLK_HZ(CLK_HZ)) i_uart_rx
 (
 	.clk(clk),
